@@ -5,7 +5,9 @@ async function checkWeather(city) {
   const response = await fetch(apiUrl + `&q=${city}` + `&appid=${apiKey}`)
   let data = await response.json();
   console.log(data);
-
+  if (data.cod == '404') {
+    alert("No Such City Found");
+  }
   const weatherIconCode = data.weather[0].icon;
   const weatherIconUrl = 'https://openweathermap.org/img/wn/' + weatherIconCode + '@2x.png'
   document.querySelector(".city").innerHTML = data.name;
